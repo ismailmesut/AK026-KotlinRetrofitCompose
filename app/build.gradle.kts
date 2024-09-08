@@ -48,6 +48,7 @@ android {
         }
     }
 }
+val retrofitVersion = "2.9.0"
 
 dependencies {
 
@@ -66,4 +67,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
+
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
 }

@@ -14,6 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ismailmesutmujde.kotlinretrofitcompose.ui.theme.KotlinRetrofitComposeTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val BASE_URL = "https://raw.githubusercontent.com/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
