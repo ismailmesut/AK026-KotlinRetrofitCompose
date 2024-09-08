@@ -26,6 +26,8 @@ import androidx.compose.material3.TopAppBarDefaults
 
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -59,6 +61,10 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
+    
+    var cryptoModels = remember {
+        mutableStateListOf<CryptoModel>()
+    }
 
     val BASE_URL = "https://raw.githubusercontent.com/"
     val retrofit = Retrofit.Builder()
@@ -75,9 +81,13 @@ fun MainScreen() {
         ) {
             if (response.isSuccessful) {
                 response.body()?.let {
+                    //list
+                    cryptoModels.addAll(it)
+
+                    /*
                     it.forEach {
                         println(it.currency)
-                    }
+                    }*/
                 }
             }
         }
@@ -88,7 +98,7 @@ fun MainScreen() {
     })
 
     Scaffold(topBar = {AppBar()}) {
-
+        CryptoList(cryptos = cryptoModels)
     }
 
 }
@@ -115,7 +125,9 @@ fun CryptoList(cryptos: List<CryptoModel>) {
 
 @Composable
 fun CryptoRow(crypto: CryptoModel) {
-    Column(modifier = Modifier.fillMaxWidth().background(color = MaterialTheme.colorScheme.background)) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .background(color = Color.Yellow)) {
         Text(text = crypto.currency,
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(2.dp),
